@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from './components/header'
 import Control from './components/control';
 import FrameContainer from './components/frameContainer';
 import Canvas from './components/canvas';
@@ -9,8 +10,8 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-          <h2>Code-Jam Piskel-clone</h2>
-          </header>
+          <Header />  
+        </header>
         <main>
           <section>
             <Control />
