@@ -1,7 +1,7 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 import './header.css';
-import logo1 from '../../img/Shape.png'
-import logo2 from '../../img/conf.png'
+import logo1 from '../../img/Shape.png';
+import logo2 from '../../img/conf.png';
 
 const Header = () => {
   return ( <Fragment>
