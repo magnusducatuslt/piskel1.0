@@ -8,7 +8,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header>header</header>
+        <header>
+          <h2>Code-Jam Piskel-clone</h2>
+          </header>
         <main>
           <section>
             <Control />
