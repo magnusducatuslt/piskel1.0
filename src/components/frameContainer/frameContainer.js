@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Frame from '../frame';
 import { NewFrame } from '../buttons';
 import './frameContainer.css';
@@ -10,13 +11,18 @@ import './frameContainer.css';
  * 5. when click dublicate will create dublicate of current frame and push rest down
  */
 class FrameContainer extends Component {
+  fillContainerByFrames = (array, off, cloneElem) => {
+    return array.length
+      ? array.map((elem, index) => (
+          <Frame key={index} onDubl={cloneElem} onDel={off} index={index} />
+        ))
+      : [];
+  };
   render = () => {
+    const { frames } = this.props;
+    //const filledByFrames = this.fillContainerByFrames();
     return (
       <div className="frame-container">
-        <Frame />
-        <Frame />
-        <Frame />
-        <Frame />
         <NewFrame
           onClick={() => console.log(`new frame`)}
           value={`Add new frame`}
@@ -25,5 +31,9 @@ class FrameContainer extends Component {
     );
   };
 }
-
-export default FrameContainer;
+const mapStateToProps = ({ frames }) => {
+  return {
+    frames
+  };
+};
+export default connect(mapStateToProps)(FrameContainer);
