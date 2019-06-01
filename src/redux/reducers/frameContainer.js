@@ -30,7 +30,10 @@ export default function frameContainerReducer(state = initialState, action) {
       return { ...state, framesArray: [...cloneArray] };
     case ADD_FRAME:
       const addFrameArray = [...state.framesArray];
-      return { ...state, framesArray: addFrameArray.push(state.frameSchemes) };
+      return {
+        ...state,
+        framesArray: addFrameArray.concat(state.frameSchemes)
+      };
     default:
       return state;
   }

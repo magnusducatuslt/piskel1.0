@@ -21,6 +21,7 @@ class FrameContainer extends Component {
   };
   render = () => {
     const { frames, addFrame, cloneFrame, deleteFrame } = this.props;
+    console.log(frames);
     const filledByFrames = this.fillContainerByFrames(
       frames.framesArray,
       deleteFrame,
