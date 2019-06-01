@@ -6,9 +6,9 @@ import logo2 from '../../img/conf.png';
 const Header = () => {
   return (
     <Fragment>
-      <img class="menu" src={logo1} />
+      <img className="menu" src={logo1} />
       <h2>Code-Jam</h2>
-      <img class="conf" src={logo2} />
+      <img className="conf" src={logo2} />
     </Fragment>
   );
 };
