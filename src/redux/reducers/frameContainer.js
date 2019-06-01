@@ -1,4 +1,4 @@
-import { DELETE_FRAME, CLONE_FRAME } from '../actionTypes';
+import { DELETE_FRAME, CLONE_FRAME, ADD_FRAME } from '../actionTypes';
 const initialState = {
   frameSchemes: {
     background: null
@@ -10,8 +10,12 @@ const initialState = {
 export default function frameContainerReducer(state = initialState, action) {
   switch (action.type) {
     case DELETE_FRAME:
+      const deletePayload = { ...action.payload };
+      const deleteArray = [...state.framesArray];
+      deleteArray.splice(deletePayload, 1);
       return {
-        ...state
+        ...state,
+        framesArray: [...deleteArray]
       };
     case CLONE_FRAME:
       /**
@@ -19,8 +23,14 @@ export default function frameContainerReducer(state = initialState, action) {
        * 2. push in array "to id"
        * 3. concat(from id)
        * */
+      const clonePayload = { ...action.payload };
+      const cloneArray = [...state.framesArray];
+      cloneArray.splice(clonePayload.key, 0, cloneArray[clonePayload.key]);
 
-      return { ...state };
+      return { ...state, framesArray: [...cloneArray] };
+    case ADD_FRAME:
+      const addFrameArray = [...state.framesArray];
+      return { ...state, framesArray: addFrameArray.push(state.frameSchemes) };
     default:
       return state;
   }

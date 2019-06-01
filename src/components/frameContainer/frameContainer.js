@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { addFrame, deleteFrame, cloneFrame } from '../../redux/actions';
 import Frame from '../frame';
 import { NewFrame } from '../buttons';
 import './frameContainer.css';
@@ -19,16 +20,16 @@ class FrameContainer extends Component {
       : [];
   };
   render = () => {
-    const { frames } = this.props;
-    //const filledByFrames = this.fillContainerByFrames();
-    return (
-      <div className="frame-container">
-        <NewFrame
-          onClick={() => console.log(`new frame`)}
-          value={`Add new frame`}
-        />
-      </div>
+    const { frames, addFrame, cloneFrame, deleteFrame } = this.props;
+    const filledByFrames = this.fillContainerByFrames(
+      frames.framesArray,
+      deleteFrame,
+      cloneFrame
     );
+    filledByFrames.push(
+      <NewFrame key="new" onClick={() => addFrame()} value={`Add new frame`} />
+    );
+    return <div className="frame-container">{filledByFrames}</div>;
   };
 }
 const mapStateToProps = ({ frames }) => {
@@ -36,4 +37,12 @@ const mapStateToProps = ({ frames }) => {
     frames
   };
 };
-export default connect(mapStateToProps)(FrameContainer);
+const mapDispatchToProps = {
+  addFrame,
+  cloneFrame,
+  deleteFrame
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FrameContainer);
