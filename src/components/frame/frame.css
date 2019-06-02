@@ -8,6 +8,10 @@
   border: 3px solid #c4c4c4;
   box-sizing: border-box;
   margin-top: 2vh;
+
+  background-repeat:no-repeat;
+  background-position: center center;
+  background-size: 100%;
 }
 
 .frame .top, .frame .bottom {
