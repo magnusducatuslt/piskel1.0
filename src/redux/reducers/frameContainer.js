@@ -3,7 +3,8 @@ import {
   CLONE_FRAME,
   ADD_FRAME,
   SAVE_FRAME_STATE,
-  SET_CURRENT_FRAME
+  SET_CURRENT_FRAME,
+  CHANGE_CURRENT_FRAME
 } from '../actionTypes';
 const initialState = {
   frameSchemes: {
@@ -13,7 +14,7 @@ const initialState = {
   },
   currentFrame: {
     index: null,
-    shapes: [],
+    shapes: [[[0, 0]]],
     backgroundUrl: ``
   },
   framesArray: []
@@ -48,9 +49,19 @@ export default function frameContainerReducer(state = initialState, action) {
       };
     case SAVE_FRAME_STATE:
       const currFrameState = { ...state.currentFrame };
-      const saveFramePayload = { ...action.payload.frameContainer };
-      currFrameState.shapes.concat(saveFramePayload.cordinates);
-      currFrameState.backgroundUrl = saveFramePayload.backgroundUrl;
+      const savedFramePayload = { ...action.payload };
+      currFrameState.shapes = savedFramePayload.isNew
+        ? newShape(
+            currFrameState.shapes,
+            savedFramePayload.x,
+            savedFramePayload.y
+          )
+        : addToShape(
+            currFrameState.shapes,
+            savedFramePayload.x,
+            savedFramePayload.y
+          );
+      currFrameState.backgroundUrl = savedFramePayload.backgroundUrl;
       return {
         ...state,
         currentFrame: currFrameState
@@ -64,7 +75,32 @@ export default function frameContainerReducer(state = initialState, action) {
         ...state,
         currentFrame: oldcurrentFrame
       };
+    case CHANGE_CURRENT_FRAME:
+      /**
+       * 1. update elem by index from currentFrame
+       * 2. set currentFrame from framesArray by index
+       */
+      const currentFrameChange = { ...state.currentFrame };
+      const framesArrayChange = [...state.framesArray];
+      framesArrayChange[currentFrameChange.index] = currentFrameChange;
+      currentFrameChange = framesArrayChange[action.payload.key];
+      return {
+        ...state,
+        currentFrame: currentFrameChange,
+        framesArray: [...framesArrayChange]
+      };
     default:
       return state;
   }
+}
+
+function addToShape(array, x, y) {
+  const oldArray = [...array];
+  oldArray[oldArray.length - 1].push([x, y]);
+  return oldArray;
+}
+function newShape(array, x, y) {
+  const oldArray = [...array];
+  oldArray.push([[x, y]]);
+  return oldArray;
 }

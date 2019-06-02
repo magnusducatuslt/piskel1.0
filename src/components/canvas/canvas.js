@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   saveMouseCordinatesBegin,
-  stopMouseCordinatesEnd
+  stopMouseCordinatesEnd,
+  trackMouse
 } from '../../redux/actions';
 import './canvas.css';
 
@@ -30,33 +31,43 @@ class Canvas extends Component {
     this.drawEnd();
     this.props.stopMouseCordinatesEnd({
       payload: {
-        canvas: {
-          x: e.nativeEvent.offsetX,
-          y: e.nativeEvent.offsetY,
-          isDown: false,
-          operations: {}
-        }
+        x: e.nativeEvent.offsetX,
+        y: e.nativeEvent.offsetY,
+        isDown: false,
+        isNew: false,
+        backgroundUrl: null
       }
     });
     //document.getElementById('img').src = this.canvas.current.toDataURL();
   };
   mouseDown = e => {
     e.preventDefault();
-    console.log('mouse Down', e.offsetX, e.offsetY);
+    console.log('mouse Down', e.nativeEvent.offsetX, e.nativeEvent.offsetY);
     this.props.saveMouseCordinatesBegin({
       payload: {
         x: e.nativeEvent.offsetX,
         y: e.nativeEvent.offsetY,
         isDown: true,
-        operations: {}
+        isNew: true,
+        backgroundUrl: null
       }
     });
     this.drawBegin(e.nativeEvent.offsetX, e.nativeEvent.offsetY);
   };
   mouseMove = e => {
     e.preventDefault();
-    if (this.props.canvasState.mouse.isDown)
+    if (this.props.canvasState.mouse.isDown) {
       this.drawMove(e.nativeEvent.offsetX, e.nativeEvent.offsetY);
+      this.props.trackMouse({
+        payload: {
+          x: e.nativeEvent.offsetX,
+          y: e.nativeEvent.offsetY,
+          isDown: true,
+          isNew: false,
+          backgroundUrl: null
+        }
+      });
+    }
   };
   drawBegin = (x, y) => {
     var canvas = document.getElementById('canvas');
@@ -104,7 +115,8 @@ const mapStateToProps = ({ frames, canvasState }) => {
 };
 const mapDispatchToProps = {
   saveMouseCordinatesBegin,
-  stopMouseCordinatesEnd
+  stopMouseCordinatesEnd,
+  trackMouse
 };
 export default connect(
   mapStateToProps,
