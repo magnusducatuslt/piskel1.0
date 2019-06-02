@@ -37,3 +37,12 @@ header div h2 {
   border: none;
   background-color: white;
 }
+
+@media (max-width: 600px) {
+  .conf {
+    margin-left: 55vw;  
+  }
+  h2 {
+    font-size: 12px;
+  }
+}

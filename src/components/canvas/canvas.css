@@ -4,3 +4,16 @@
 
   background: #e5e5e5;
 }
+#canvas {
+  width: 40vw;
+  height: 80vh;
+}
+
+@media (max-width:600px) {
+  .canvas {
+    height: 50vh;
+  }
+  #canvas {
+    height: 50vh;
+  }
+}

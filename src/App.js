@@ -27,7 +27,6 @@ class App extends Component {
             <Animation />
           </section>
         </main>
-        <footer>footer</footer>
       </div>
     );
   }
