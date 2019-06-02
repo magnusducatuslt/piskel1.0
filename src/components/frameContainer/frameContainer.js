@@ -4,6 +4,7 @@ import { addFrame, deleteFrame, cloneFrame } from '../../redux/actions';
 import Frame from '../frame';
 import { NewFrame } from '../buttons';
 import './frameContainer.css';
+
 /**
  * 1. when add frame, frame init with empty content
  * 2. when drag frame change number in order
