@@ -11,7 +11,7 @@ class Canvas extends Component {
   constructor() {
     super();
     this.container = React.createRef();
-    this.canvas = React.createRef();
+    this.canvas = null;
     this.isDown = false;
   }
   componentDidMount = () => {
@@ -22,7 +22,7 @@ class Canvas extends Component {
     layout.width = this.container.current.getBoundingClientRect().width;
 
     layout.height = this.container.current.getBoundingClientRect().height;
-
+    this.canvas = layout;
     this.container.current.appendChild(layout);
   };
   mouseUp = e => {
@@ -35,10 +35,9 @@ class Canvas extends Component {
         y: e.nativeEvent.offsetY,
         isDown: false,
         isNew: false,
-        backgroundUrl: null
+        backgroundUrl: this.canvas.toDataURL()
       }
     });
-    //document.getElementById('img').src = this.canvas.current.toDataURL();
   };
   mouseDown = e => {
     e.preventDefault();
@@ -49,7 +48,7 @@ class Canvas extends Component {
         y: e.nativeEvent.offsetY,
         isDown: true,
         isNew: true,
-        backgroundUrl: null
+        backgroundUrl: this.canvas.toDataURL()
       }
     });
     this.drawBegin(e.nativeEvent.offsetX, e.nativeEvent.offsetY);
@@ -64,7 +63,7 @@ class Canvas extends Component {
           y: e.nativeEvent.offsetY,
           isDown: true,
           isNew: false,
-          backgroundUrl: null
+          backgroundUrl: this.canvas.toDataURL()
         }
       });
     }
@@ -94,6 +93,18 @@ class Canvas extends Component {
   };
   render = () => {
     console.log('rednder');
+    const shape = this.props.frames.currentFrame.shapes;
+    if (shape.length > 0) {
+      for (let i = 0; i < shape.length; i++) {
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        ctx.beginPath();
+        for (let s = 0; s < shape[i].length; s++) {
+          ctx.fillRect(shape[i][s][0], shape[i][s][1], 10, 10);
+        }
+        ctx.closePath();
+      }
+    }
     return (
       <div>
         <div

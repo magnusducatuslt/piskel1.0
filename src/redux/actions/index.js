@@ -69,9 +69,6 @@ export const changeCurrentFrame = ({ payload }) => {
     payload
   };
 };
-export const changeAndSetCurrentFrame = ({ payload }) => {
-  return function(disaptch) {};
-};
 export const saveMouseCordinatesBegin = ({ payload }) => {
   return function(dispatch) {
     dispatch(saveFrameState({ payload }));

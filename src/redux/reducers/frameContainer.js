@@ -14,7 +14,7 @@ const initialState = {
   },
   currentFrame: {
     index: null,
-    shapes: [[[0, 0]]],
+    shapes: [],
     backgroundUrl: ``
   },
   framesArray: []
@@ -44,13 +44,15 @@ export default function frameContainerReducer(state = initialState, action) {
     case ADD_FRAME:
       const addFrameArray = [...state.framesArray];
       const newFrameArray = addFrameArray.concat({ ...state.frameSchemes });
-      const currentFrameAddFrame = newFrameArray[0];
+      const currentFrameAddFrame = newFrameArray[newFrameArray.length - 1];
+      currentFrameAddFrame.index = newFrameArray.length - 1;
       return {
         ...state,
         framesArray: newFrameArray,
         currentFrame: currentFrameAddFrame
       };
     case SAVE_FRAME_STATE:
+      console.log(action.payload);
       const currFrameState = { ...state.currentFrame };
       const savedFramePayload = { ...action.payload };
       currFrameState.shapes = savedFramePayload.isNew
