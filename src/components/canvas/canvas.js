@@ -90,19 +90,22 @@ class Canvas extends Component {
       ctx.closePath();
     }
   };
+  reDrawing([...shape]) {
+    for (let i = 0; i < shape.length; i++) {
+      var canvas = document.getElementById('canvas');
+      var ctx = canvas.getContext('2d');
+      ctx.beginPath();
+      for (let s = 0; s < shape[i].length; s++) {
+        ctx.fillRect(shape[i][s][0], shape[i][s][1], 10, 10);
+      }
+      ctx.closePath();
+    }
+  }
   render = () => {
     console.log('rednder');
     const shape = this.props.frames.currentFrame.shapes;
     if (shape.length > 0) {
-      for (let i = 0; i < shape.length; i++) {
-        var canvas = document.getElementById('canvas');
-        var ctx = canvas.getContext('2d');
-        ctx.beginPath();
-        for (let s = 0; s < shape[i].length; s++) {
-          ctx.fillRect(shape[i][s][0], shape[i][s][1], 10, 10);
-        }
-        ctx.closePath();
-      }
+      this.reDrawing(shape);
     }
     return (
       <div>
