@@ -11,7 +11,7 @@
   background-color: #b1b0b0;
 }
 .animation-config button {
-  width: 5vw;
+  width: 4vw;
   height: 5vh;
   color: white;
   background-color: rgb(22, 22, 22);
@@ -19,6 +19,7 @@
   border: none;
   border-radius: 20px;
   outline: none;
+  font-size: 12px;
 }
 
 .animation-config button:active {
