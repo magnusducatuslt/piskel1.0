@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addFrame, deleteFrame, cloneFrame } from '../../redux/actions';
+import {
+  addFrame,
+  deleteFrame,
+  cloneFrame,
+  setCurrentFrame
+} from '../../redux/actions';
 import Frame from '../frame';
 import { NewFrame } from '../buttons';
 import './frameContainer.css';
@@ -13,20 +18,44 @@ import './frameContainer.css';
  * 5. when click dublicate will create dublicate of current frame and push rest down
  */
 class FrameContainer extends Component {
-  fillContainerByFrames = (array, off, cloneElem) => {
+  fillContainerByFrames = (array, off, cloneElem, choose) => {
     return array.length
       ? array.map((elem, index) => (
-          <Frame key={index} onDubl={cloneElem} onDel={off} index={index} />
+          <Frame
+            key={index}
+            onChoose={choose}
+            onDubl={cloneElem}
+            onDel={off}
+            index={index}
+            background={null}
+          />
         ))
       : [];
   };
+
+  handleExecution = func => e => {
+    e.preventDefault();
+    const newArgumnets = [].concat(arguments)
+    newArgumnets[0] = {payload:{
+      key:e.target.parentNode.querySelector(`.frame__index`).innerText
+    }}
+    return func.apply(this, newArgumnets);
+  };
   render = () => {
-    const { frames, addFrame, cloneFrame, deleteFrame } = this.props;
+    const {
+      frames,
+      addFrame,
+      cloneFrame,
+      deleteFrame,
+      setCurrentFrame
+    } = this.props;
     console.log(frames);
     const filledByFrames = this.fillContainerByFrames(
       frames.framesArray,
-      deleteFrame,
-      cloneFrame
+      this.handleExecution(deleteFrame),
+      this.handleExecution(cloneFrame),
+      this.handleExecution(setCurrentFrame)
+      
     );
     filledByFrames.push(
       <NewFrame key="new" onClick={() => addFrame()} value={`Add new frame`} />
@@ -42,7 +71,8 @@ const mapStateToProps = ({ frames }) => {
 const mapDispatchToProps = {
   addFrame,
   cloneFrame,
-  deleteFrame
+  deleteFrame,
+  setCurrentFrame
 };
 export default connect(
   mapStateToProps,
