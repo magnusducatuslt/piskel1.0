@@ -1,0 +1,26 @@
+.animation-window {
+  width: 20vw;
+  height: 30vh;
+  background-color: #e5e5e5;
+}
+.animation-config {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 8vh;
+  background-color: #b1b0b0;
+}
+.animation-config button {
+  width: 5vw;
+  height: 5vh;
+  color: white;
+  background-color: rgb(22, 22, 22);
+  
+  border: none;
+  border-radius: 40%;
+  outline: none;
+}
+
+.animation-config button:active {
+  background-color: rgb(87, 90, 90);
+}

@@ -3,6 +3,7 @@ import Header from './components/header'
 import Control from './components/control';
 import FrameContainer from './components/frameContainer';
 import Canvas from './components/canvas';
+import Animation from './components/animationBoard'
 import './App.css';
 
 class App extends Component {
@@ -22,7 +23,9 @@ class App extends Component {
           <section>
             <Canvas />
           </section>
-          <section>4</section>
+          <section>
+            <Animation />
+          </section>
         </main>
         <footer>footer</footer>
       </div>
