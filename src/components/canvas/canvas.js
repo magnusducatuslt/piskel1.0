@@ -19,9 +19,9 @@ class Canvas extends Component {
     this.isDown = canvasState.mouse.isDown;
     const layout = document.createElement('canvas');
     layout.id = 'canvas';
-    layout.width = this.container.current.getBoundingClientRect().width;
+    // layout.width = this.container.current.getBoundingClientRect().width;
 
-    layout.height = this.container.current.getBoundingClientRect().height;
+    // layout.height = this.container.current.getBoundingClientRect().height;
 
     this.container.current.appendChild(layout);
   };

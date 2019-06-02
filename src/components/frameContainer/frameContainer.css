@@ -13,17 +13,20 @@
 }
 
 .new-frame {
-  width: 5vw;
+  border: none;
   margin-bottom: 5vh;
+  display: flex;
+  justify-content: center;
 }
 .new-frame button{
   font-family: Roboto-Medium;
-  height: 100%;
+  width: 4vw;
+  height: 6vh;
   background-image: url('../../img/+.png');
   background-repeat: no-repeat;
   outline: none;
   font-size: 12px;
-  border: none;
+  border: 2px solid rgb(136, 132, 132);
 }
 .new-frame button:hover{
   cursor: pointer;
@@ -32,4 +35,23 @@
 .frame {
   width: 9vw;
   height: 18vh;
+}
+
+@media (max-width: 1300px) {
+  .new-frame button{
+    font-size: 8px;
+  }
+}
+@media (max-width: 600px) {
+  .new-frame button {
+    font-size: 0px;
+    border: 1px solid rgb(136, 132, 132);
+    height: 2vh;
+  }
+  .new-frame {
+    margin-bottom: 2vh;
+  }
+  .frame {
+    height: 10vh;
+  }
 }
