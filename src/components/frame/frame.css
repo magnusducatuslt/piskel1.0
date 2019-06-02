@@ -1,8 +1,30 @@
 .frame {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 100%;
   height: 20vh;
   background: rgba(255, 255, 255, 0.5);
   border: 3px solid #c4c4c4;
   box-sizing: border-box;
   margin-top: 2vh;
+}
+
+.frame .top, .frame .bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.frame .top div:first-child {
+  color: #c4c4c4;
+
+}
+
+.frame .top div,.frame .bottom div {
+  background-color: rgb(136, 132, 132);
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

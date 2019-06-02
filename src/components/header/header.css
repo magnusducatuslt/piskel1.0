@@ -20,9 +20,7 @@ header div h2 {
   font-family: Roboto-Medium;
   margin-left: 8vw; 
 }
-.menu {
-  margin-left: 2vw;
-}
+
 .menu:hover {
   cursor: pointer;
 }
@@ -31,4 +29,11 @@ header div h2 {
 }
 .conf:hover {
   cursor: pointer;
+}
+.fullScreen { 
+  margin-left: 2vw;
+  width: 3vw;
+  height: 5vh;
+  border: none;
+  background-color: white;
 }
