@@ -1,9 +1,17 @@
-import { DELETE_FRAME, CLONE_FRAME, ADD_FRAME } from '../actionTypes';
+import {
+  DELETE_FRAME,
+  CLONE_FRAME,
+  ADD_FRAME,
+  SAVE_FRAME_STATE
+} from '../actionTypes';
 const initialState = {
   frameSchemes: {
     background: null
   },
-  currentFrame: null,
+  currentFrame: {
+    index: null,
+    element: null
+  },
   framesArray: []
 };
 
@@ -33,6 +41,10 @@ export default function frameContainerReducer(state = initialState, action) {
       return {
         ...state,
         framesArray: addFrameArray.concat(state.frameSchemes)
+      };
+    case SAVE_FRAME_STATE:
+      return {
+        ...state
       };
     default:
       return state;
