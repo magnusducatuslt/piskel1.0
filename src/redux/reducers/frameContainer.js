@@ -4,7 +4,8 @@ import {
   ADD_FRAME,
   SAVE_FRAME_STATE,
   SET_CURRENT_FRAME,
-  CHANGE_CURRENT_FRAME
+  CHANGE_CURRENT_FRAME,
+  SET_VALUE_FPS
 } from '../actionTypes';
 const initialState = {
   frameSchemes: {
@@ -17,7 +18,9 @@ const initialState = {
     shapes: [],
     backgroundUrl: ``
   },
-  framesArray: []
+  framesArray: [],
+  fps: 2,
+  isAnimate: false
 };
 
 export default function frameContainerReducer(state = initialState, action) {
@@ -93,6 +96,8 @@ export default function frameContainerReducer(state = initialState, action) {
         currentFrame: currentFrameChange,
         framesArray: [...framesArrayChange]
       };
+    case SET_VALUE_FPS:
+      return { ...state, fps: action.payload, isAnimate: true };
     default:
       return state;
   }

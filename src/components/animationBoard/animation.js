@@ -1,5 +1,9 @@
+/**
+ * TODO DRY, and animate to class, stop animate and start on new frame
+ */
 import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
+import { setValueFPS } from '../../redux/actions';
 import './animation.css';
 
 const full = () => {
@@ -18,29 +22,34 @@ const full = () => {
   }
 };
 class Animation extends Component {
-  reDrawing([...shape]) {
-    for (let i = 0; i < shape.length; i++) {
-      var canvas = document.getElementById('window-canvas');
-      var ctx = canvas.getContext('2d');
-      ctx.beginPath();
-      for (let s = 0; s < shape[i].length; s++) {
-        ctx.fillRect(shape[i][s][0], shape[i][s][1], 10, 10);
-      }
-      ctx.closePath();
-    }
-  }
+  onClick2 = e => {
+    e.preventDefault();
+    const { setValueFPS } = this.props;
+    setValueFPS({ payload: 2 });
+  };
+  onClick4 = e => {
+    e.preventDefault();
+    const { setValueFPS } = this.props;
+    setValueFPS({ payload: 4 });
+  };
+  onClick8 = e => {
+    e.preventDefault();
+    const { setValueFPS } = this.props;
+    setValueFPS({ payload: 8 });
+  };
   render = () => {
     if (this.props.frames.framesArray.length > 0) {
       const shape = [...this.props.frames.framesArray];
-      animate(shape, this.reDrawing);
+      animate(shape, this.props.frames.isAnimate, this.props.frames.fps);
     }
+
     return (
       <Fragment>
         <div id="ww" className="animation-window" />
         <div className="animation-config">
-          <button>2 FPS</button>
-          <button>4 FPS</button>
-          <button>8 FPS</button>
+          <button onClick={this.onClick2}>2 FPS</button>
+          <button onClick={this.onClick4}>4 FPS</button>
+          <button onClick={this.onClick8}>8 FPS</button>
           <button onClick={full}>full screen</button>
         </div>
       </Fragment>
@@ -48,16 +57,16 @@ class Animation extends Component {
   };
 }
 
-function animate(shape) {
-  console.log(shape);
+function animate(shape, isAnimate, fpS = 2) {
   let requestId;
-  const fps = shape.length;
+  const fps = fpS;
   let count = 0;
+  const length = shape.length;
   const array = [...shape];
   function loop() {
     requestId = undefined;
-    if (count >= fps) count = 0;
-    console.log(array[count]);
+    if (count >= length) count = 0;
+    //console.log(array[count]);
     // var canvas = document.getElementById('window-canvas');
     // var ctx = canvas.getContext('2d');
     draw(array[count].backgroundUrl);
@@ -85,11 +94,19 @@ function animate(shape) {
       .style.setProperty('background-image', `url(${shaped})`);
     count++;
   }
-  start();
+  if (isAnimate) {
+    start();
+  }
 }
 const mapStateToProps = ({ frames }) => {
   return {
     frames
   };
 };
-export default connect(mapStateToProps)(Animation);
+const mapDispatchToProps = {
+  setValueFPS
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Animation);

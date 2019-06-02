@@ -1,3 +1,6 @@
+/**
+ * TODO store local cordinates and send to store after mouseUp
+ */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
