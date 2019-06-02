@@ -1,8 +1,6 @@
 .canvas {
-  width: 800px;
-  height: 800px;
-  left: 257px;
-  top: 64px;
+  width: 40vw;
+  height: 80vh;
 
   background: #e5e5e5;
 }

@@ -21,7 +21,7 @@ header h2 {
 
 main {
   margin-top: 8vh;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  justify-content: space-between;
 
 }
