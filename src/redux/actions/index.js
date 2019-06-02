@@ -6,7 +6,8 @@ import {
   SAVE_FRAME_STATE,
   STOP_DRAWING,
   START_DRAWING,
-  REDRAWING_FRAME
+  REDRAWING_FRAME,
+  SET_CURRENT_FRAME
 } from '../actionTypes';
 export const deleteFrame = ({ payload }) => {
   return {
@@ -52,6 +53,12 @@ export const startDrawing = ({ payload }) => {
 export const redrawingFrame = ({ payload }) => {
   return {
     type: REDRAWING_FRAME,
+    payload
+  };
+};
+export const setCurrentFrame = ({ payload }) => {
+  return {
+    type: SET_CURRENT_FRAME,
     payload
   };
 };

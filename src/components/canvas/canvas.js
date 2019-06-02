@@ -36,7 +36,7 @@ class Canvas extends Component {
         operations: {}
       }
     });
-    //document.getElementById('img').src = canvas.toDataURL();
+    //document.getElementById('img').src = this.canvas.current.toDataURL();
   };
   mouseDown = e => {
     e.preventDefault();
