@@ -1,5 +1,5 @@
 /**
- * TODO DRY, and animate to class
+ * TODO DRY, and animate to class, stop animate and start on new frame
  */
 import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
