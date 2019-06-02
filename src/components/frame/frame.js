@@ -4,9 +4,13 @@ import del from '../../img/delete.png';
 import cop from '../../img/copy.png';
 import con from '../../img/drag.png';
 
-const Frame = ({ onDubl, onDel, onChoose, index }) => {
+const Frame = ({ onDubl, onDel, onChoose, onChange, index, background }) => {
   return (
-    <div className="frame">
+    <div
+      className="frame"
+      onClick={onChange}
+      style={{ backgroundImage: `url(${background})` }}
+    >
       <div className="top">
         <div className="frame__index">{index}</div>
         <div onClick={onDel}>
