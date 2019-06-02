@@ -8,8 +8,7 @@ const initialState = {
   mouse: {
     x: null,
     y: null,
-    isDown: null,
-    operations: []
+    isDown: null
   },
   currentLayout: {
     operations: []
@@ -22,11 +21,11 @@ export default function canvasReducer(state = initialState, action) {
   };
   switch (action.type) {
     case START_DRAWING:
-      return saveMouseMove({ state, currentLayout, action });
+      return saveMouseMove({ state, action });
     case STOP_DRAWING:
-      return saveMouseMove({ state, currentLayout, action });
+      return saveMouseMove({ state, action });
     case SAVE_MOUSE_CORDINATES:
-      return saveMouseMove({ state, currentLayout, action });
+      return saveMouseMove({ state, action });
     case REDRAWING_FRAME:
 
     default:
@@ -34,13 +33,11 @@ export default function canvasReducer(state = initialState, action) {
   }
 }
 
-function saveMouseMove({ state, currentLayout, action }) {
+function saveMouseMove({ state, action }) {
   const { mouse } = state;
-  currentLayout.operations.concat(state.currentLayout.operations);
-  const { x, y, isDown, operations } = action.payload;
+  const { x, y, isDown } = action.payload;
   mouse.x = x;
   mouse.y = y;
   mouse.isDown = isDown;
-  currentLayout.operations.push(operations);
-  return { ...state, mouse, currentLayout };
+  return { ...state, mouse };
 }

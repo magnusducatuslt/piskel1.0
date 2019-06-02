@@ -3,18 +3,19 @@ import {
   CLONE_FRAME,
   ADD_FRAME,
   SAVE_FRAME_STATE,
-  SET_CURRENT_FRAME
+  SET_CURRENT_FRAME,
+  CHANGE_CURRENT_FRAME
 } from '../actionTypes';
 const initialState = {
   frameSchemes: {
-    background: null,
     index: null,
+    shapes: [],
     element: null
   },
   currentFrame: {
     index: null,
-    element: null,
-    background: null
+    shapes: [[[0, 0]]],
+    backgroundUrl: ``
   },
   framesArray: []
 };
@@ -42,13 +43,31 @@ export default function frameContainerReducer(state = initialState, action) {
       return { ...state, framesArray: [...cloneArray] };
     case ADD_FRAME:
       const addFrameArray = [...state.framesArray];
+      const newFrameArray = addFrameArray.concat({ ...state.frameSchemes });
+      const currentFrameAddFrame = newFrameArray[0];
       return {
         ...state,
-        framesArray: addFrameArray.concat(state.frameSchemes)
+        framesArray: newFrameArray,
+        currentFrame: currentFrameAddFrame
       };
     case SAVE_FRAME_STATE:
+      const currFrameState = { ...state.currentFrame };
+      const savedFramePayload = { ...action.payload };
+      currFrameState.shapes = savedFramePayload.isNew
+        ? newShape(
+            currFrameState.shapes,
+            savedFramePayload.x,
+            savedFramePayload.y
+          )
+        : addToShape(
+            currFrameState.shapes,
+            savedFramePayload.x,
+            savedFramePayload.y
+          );
+      currFrameState.backgroundUrl = savedFramePayload.backgroundUrl;
       return {
-        ...state
+        ...state,
+        currentFrame: currFrameState
       };
     case SET_CURRENT_FRAME:
       const oldcurrentFrame = { ...state.currentFrame };
@@ -59,7 +78,32 @@ export default function frameContainerReducer(state = initialState, action) {
         ...state,
         currentFrame: oldcurrentFrame
       };
+    case CHANGE_CURRENT_FRAME:
+      /**
+       * 1. update elem by index from currentFrame
+       * 2. set currentFrame from framesArray by index
+       */
+      const currentFrameChange = { ...state.currentFrame };
+      const framesArrayChange = [...state.framesArray];
+      framesArrayChange[currentFrameChange.index] = currentFrameChange;
+      currentFrameChange = framesArrayChange[action.payload.key];
+      return {
+        ...state,
+        currentFrame: currentFrameChange,
+        framesArray: [...framesArrayChange]
+      };
     default:
       return state;
   }
+}
+
+function addToShape(array, x, y) {
+  const oldArray = [...array];
+  oldArray[oldArray.length - 1].push([x, y]);
+  return oldArray;
+}
+function newShape(array, x, y) {
+  const oldArray = [...array];
+  oldArray.push([[x, y]]);
+  return oldArray;
 }
