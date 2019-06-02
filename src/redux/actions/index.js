@@ -7,7 +7,8 @@ import {
   STOP_DRAWING,
   START_DRAWING,
   REDRAWING_FRAME,
-  SET_CURRENT_FRAME
+  SET_CURRENT_FRAME,
+  CHANGE_CURRENT_FRAME
 } from '../actionTypes';
 export const deleteFrame = ({ payload }) => {
   return {
@@ -61,6 +62,15 @@ export const setCurrentFrame = ({ payload }) => {
     type: SET_CURRENT_FRAME,
     payload
   };
+};
+export const changeCurrentFrame = ({ payload }) => {
+  return {
+    type: CHANGE_CURRENT_FRAME,
+    payload
+  };
+};
+export const changeAndSetCurrentFrame = ({ payload }) => {
+  return function(disaptch) {};
 };
 export const saveMouseCordinatesBegin = ({ payload }) => {
   return function(dispatch) {

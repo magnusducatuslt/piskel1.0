@@ -1,24 +1,24 @@
 import React from 'react';
 import './frame.css';
-import del from '../../img/delete.png'
-import cop from '../../img/copy.png'
-import con from '../../img/drag.png'
+import del from '../../img/delete.png';
+import cop from '../../img/copy.png';
+import con from '../../img/drag.png';
 
-const Frame = ({ onDubl, onDel, index }) => {
+const Frame = ({ onDubl, onDel, onChoose, index }) => {
   return (
     <div className="frame">
       <div className="top">
-        <div>{index}</div>
+        <div className="frame__index">{index}</div>
         <div onClick={onDel}>
-          <img src={del} alt="delete"></img>
+          <img src={del} alt="delete" />
         </div>
       </div>
       <div className="bottom">
-        <div>
-          <img src={con} alt="config"></img>
+        <div onClick={onChoose}>
+          <img src={con} alt="config" />
         </div>
         <div onClick={onDubl}>
-          <img src={cop} alt="clone"></img>
+          <img src={cop} alt="clone" />
         </div>
       </div>
     </div>

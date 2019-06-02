@@ -37,7 +37,7 @@ class FrameContainer extends Component {
     e.preventDefault();
     const newArgumnets = [].concat(arguments)
     newArgumnets[0] = {payload:{
-      key:e.target.parentNode.querySelector(`.frame__index`).innerText
+      key:e.target.parentNode.parentNode.parentNode.querySelector(`.frame__index`).innerText
     }}
     return func.apply(this, newArgumnets);
   };
