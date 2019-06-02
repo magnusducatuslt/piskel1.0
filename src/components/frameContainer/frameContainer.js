@@ -61,7 +61,6 @@ class FrameContainer extends Component {
       deleteFrame,
       setCurrentFrame,
     } = this.props;
-    console.log(frames);
     const filledByFrames = this.fillContainerByFrames(
       frames.framesArray,
       this.handleExecution(deleteFrame),

@@ -28,3 +28,12 @@
   justify-content: center;
   align-items: center;
 }
+@media (max-width: 1000px) {
+  .frame .top div,.frame .bottom div {
+    width: 15px;
+    height: 15px;
+  }
+  .frame .top div img,.frame .bottom div img {
+    zoom: 0.5;
+  }
+}

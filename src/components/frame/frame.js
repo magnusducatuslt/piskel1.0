@@ -5,7 +5,6 @@ import cop from '../../img/copy.png';
 import con from '../../img/drag.png';
 
 const Frame = ({ onDubl, onDel, onChoose, onChange, index, background }) => {
-  console.log(background);
   return (
     <div
       className="frame"

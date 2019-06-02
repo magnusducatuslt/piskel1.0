@@ -52,7 +52,6 @@ export default function frameContainerReducer(state = initialState, action) {
         currentFrame: currentFrameAddFrame
       };
     case SAVE_FRAME_STATE:
-      console.log(action.payload);
       const currFrameState = { ...state.currentFrame };
       const savedFramePayload = { ...action.payload };
       currFrameState.shapes = savedFramePayload.isNew

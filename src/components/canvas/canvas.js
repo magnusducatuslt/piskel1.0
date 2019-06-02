@@ -20,7 +20,6 @@ class Canvas extends Component {
     const layout = document.createElement('canvas');
     layout.id = 'canvas';
     layout.width = this.container.current.getBoundingClientRect().width;
-
     layout.height = this.container.current.getBoundingClientRect().height;
     this.canvas = layout;
     this.container.current.appendChild(layout);
