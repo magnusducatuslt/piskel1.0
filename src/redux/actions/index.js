@@ -8,7 +8,8 @@ import {
   START_DRAWING,
   REDRAWING_FRAME,
   SET_CURRENT_FRAME,
-  CHANGE_CURRENT_FRAME
+  CHANGE_CURRENT_FRAME,
+  SET_VALUE_FPS
 } from '../actionTypes';
 export const deleteFrame = ({ payload }) => {
   return {
@@ -85,5 +86,12 @@ export const trackMouse = ({ payload }) => {
   return function(dispatch) {
     dispatch(saveFrameState({ payload }));
     dispatch(saveMouseCordinates({ payload }));
+  };
+};
+export const setValueFPS = ({ payload }) => {
+  console.log(payload);
+  return {
+    type: SET_VALUE_FPS,
+    payload
   };
 };
