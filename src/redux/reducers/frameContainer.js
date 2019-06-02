@@ -7,14 +7,14 @@ import {
 } from '../actionTypes';
 const initialState = {
   frameSchemes: {
-    background: null,
     index: null,
+    shapes: [],
     element: null
   },
   currentFrame: {
     index: null,
-    element: null,
-    background: null
+    shapes: [],
+    backgroundUrl: ``
   },
   framesArray: []
 };
@@ -47,8 +47,13 @@ export default function frameContainerReducer(state = initialState, action) {
         framesArray: addFrameArray.concat(state.frameSchemes)
       };
     case SAVE_FRAME_STATE:
+      const currFrameState = { ...state.currentFrame };
+      const saveFramePayload = { ...action.payload.frameContainer };
+      currFrameState.shapes.concat(saveFramePayload.cordinates);
+      currFrameState.backgroundUrl = saveFramePayload.backgroundUrl;
       return {
-        ...state
+        ...state,
+        currentFrame: currFrameState
       };
     case SET_CURRENT_FRAME:
       const oldcurrentFrame = { ...state.currentFrame };

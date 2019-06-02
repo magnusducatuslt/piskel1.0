@@ -30,10 +30,12 @@ class Canvas extends Component {
     this.drawEnd();
     this.props.stopMouseCordinatesEnd({
       payload: {
-        x: e.nativeEvent.offsetX,
-        y: e.nativeEvent.offsetY,
-        isDown: false,
-        operations: {}
+        canvas: {
+          x: e.nativeEvent.offsetX,
+          y: e.nativeEvent.offsetY,
+          isDown: false,
+          operations: {}
+        }
       }
     });
     //document.getElementById('img').src = this.canvas.current.toDataURL();

@@ -37,7 +37,7 @@ export default function canvasReducer(state = initialState, action) {
 function saveMouseMove({ state, currentLayout, action }) {
   const { mouse } = state;
   currentLayout.operations.concat(state.currentLayout.operations);
-  const { x, y, isDown, operations } = action.payload;
+  const { x, y, isDown, operations } = action.payload.canvas;
   mouse.x = x;
   mouse.y = y;
   mouse.isDown = isDown;
