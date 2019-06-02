@@ -1,13 +1,26 @@
 import React from 'react';
 import './frame.css';
-const Frame = ({ onChoose, onDubl, onDel, index, background }) => {
+import del from '../../img/delete.png'
+import cop from '../../img/copy.png'
+import con from '../../img/drag.png'
+
+const Frame = ({ onDubl, onDel, index }) => {
   return (
-    <div className="frame" style={{ backgroundImage: `url(${background})` }}>
-      {/* DO NOT DELETE THIS CLASS NAME!!! I GET INDEX OF ELEM FROM HERE!!! */}
-      <span className="frame__index">{index}</span>
-      <div onClick={onChoose}>choose</div>
-      <div onClick={onDel}>delete</div>
-      <div onClick={onDubl}>clone</div>
+    <div className="frame">
+      <div className="top">
+        <div>{index}</div>
+        <div onClick={onDel}>
+          <img src={del} alt="delete"></img>
+        </div>
+      </div>
+      <div className="bottom">
+        <div>
+          <img src={con} alt="config"></img>
+        </div>
+        <div onClick={onDubl}>
+          <img src={cop} alt="clone"></img>
+        </div>
+      </div>
     </div>
   );
 };
